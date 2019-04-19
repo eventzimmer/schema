@@ -5,7 +5,7 @@ info:
   license:
     name: MIT
 servers:
-  - url: https://api.eventzimmer.de
+  - url: /v1
 paths:
   /locations:
     get:
