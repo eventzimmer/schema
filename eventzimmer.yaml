@@ -1,0 +1,215 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: eventzimmer
+  license:
+    name: MIT
+servers:
+  - url: https://api.eventzimmer.de
+paths:
+  /locations:
+    get:
+      summary: List all available locations.
+      operationId: listLocations
+      tags:
+        - location
+      responses:
+        '200':
+          description: A list of all added locations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Location"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /sources:
+    get:
+      summary: List all available sources.
+      tags:
+        - source
+      responses:
+        '200':
+          description: A list of all added sources.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Source"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Add a list of sources.
+      security: 
+        - aggregator: []
+      tags:
+        - source
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Source"
+      responses:
+        '201':
+          description: Created.
+        '401':
+          description: Not authenticated.
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /events:
+    get:
+      summary: List all events
+      operationId: listEvents
+      parameters: 
+        - name: location
+          description: The location to search events at.
+          in: header
+          schema:
+            $ref: "#/components/schemas/Location"
+          required: true
+        - name: radius
+          description: The radius in kilometer to search relative to the location.
+          in: header
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+        - name: page
+          in: header
+          description: The page to request for. The API delivers 25 elements per page.
+          schema:
+            $ref: "#/components/schemas/Page"
+      tags: 
+        - event
+      responses:
+        '200':
+          description: A paginated array of events.
+          headers:
+            x-page:
+              description: The current page of that the API sends.
+              schema:
+                $ref: "#/components/schemas/Page"
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Events"
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Add a list of events
+      security:
+        - aggregator: []
+      operationId: addEvents
+      tags:
+        - event
+      requestBody:
+        description: A list of events to submit
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Events"
+      responses:
+        '201':
+          description: Created.
+        '401':
+          description: Not authenticated.
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  securitySchemes:
+    aggregator:
+      type: http
+      scheme: bearer
+  schemas:
+    Page:
+      type: integer
+      minimum: 1
+      default: 1
+    Source:
+      type: object
+      properties:
+        aggregator:
+          type: string
+          enum: 
+            - iCal
+            - Facebook
+        url:
+          type: string
+          format: uri
+    Location:
+      required: 
+        - latitude
+        - longitude
+      properties:
+        name:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+    Event:
+      type: object
+      required: 
+        - name
+        - url
+        - start_time
+        - location
+        - source
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+          format: uri
+        start_time:
+          type: string
+          format: date-time
+        location:
+          $ref: "#/components/schemas/Location"
+        source:
+          $ref: "#/components/schemas/Source"
+        images:
+          type: array
+          items:
+            type: string
+            format: uri
+    Events:
+      type: array
+      items:
+        $ref: "#/components/schemas/Event"
+    Error:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+
