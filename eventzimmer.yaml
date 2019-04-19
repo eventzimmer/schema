@@ -77,13 +77,21 @@ paths:
       summary: List all events
       operationId: listEvents
       parameters: 
-        - name: location
-          description: The location to search events at.
+        - name: Latitude
+          description: The latitude to search events at.
           in: header
           schema:
-            $ref: "#/components/schemas/Location"
+            type: number
+            format: float
           required: true
-        - name: radius
+        - name: Longitude
+          description: The longitude to search events at.
+          in: header
+          schema:
+            type: number
+            format: float
+          required: true
+        - name: Radius
           description: The radius in kilometer to search relative to the location.
           in: header
           schema:
@@ -91,7 +99,7 @@ paths:
             minimum: 1
             maximum: 50
             default: 10
-        - name: page
+        - name: Page
           in: header
           description: The page to request for. The API delivers 25 elements per page.
           schema:
@@ -102,7 +110,7 @@ paths:
         '200':
           description: A paginated array of events.
           headers:
-            x-page:
+            Page:
               description: The current page of that the API sends.
               schema:
                 $ref: "#/components/schemas/Page"
