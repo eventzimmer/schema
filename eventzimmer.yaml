@@ -87,9 +87,13 @@ paths:
           description: A paginated array of events.
           headers:
             Page:
-              description: The current page of that the API sends.
+              description: The current page that the API sends.
               schema:
                 $ref: "#/components/schemas/Page"
+            Page-Count:
+              description: The number of pages that exist for this query.
+              schema:
+                type: integer
           content:
             application/json:
               schema:
