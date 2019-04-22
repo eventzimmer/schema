@@ -48,30 +48,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-    post:
-      summary: Add a list of sources.
-      security: 
-        - aggregator: []
-      tags:
-        - source
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/Source"
-      responses:
-        '201':
-          description: Created.
-        '401':
-          description: Not authenticated.
-        default:
-          description: Unexpected error.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /events:
     get:
       summary: List all events
@@ -160,6 +136,9 @@ components:
       default: 1
     Source:
       type: object
+      required: 
+        - aggregator
+        - url
       properties:
         aggregator:
           type: string
@@ -169,8 +148,12 @@ components:
         url:
           type: string
           format: uri
+        last_updated:
+          type: string
+          format: date-time
     Location:
-      required: 
+      required:
+        - name
         - latitude
         - longitude
       properties:
@@ -187,7 +170,7 @@ components:
       required: 
         - name
         - url
-        - start_time
+        - starts_at
         - location
         - source
       properties:
@@ -198,7 +181,10 @@ components:
         url:
           type: string
           format: uri
-        start_time:
+        starts_at:
+          type: string
+          format: date-time
+        created_at:
           type: string
           format: date-time
         location:
