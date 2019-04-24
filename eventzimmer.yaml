@@ -4,6 +4,9 @@ info:
   title: eventzimmer
   license:
     name: MIT
+externalDocs:
+  description: Find out more about the eventzimmer event service.
+  url: https://github.com/eventzimmer/schema
 servers:
   - url: /v1
 paths:
