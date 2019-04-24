@@ -75,25 +75,11 @@ paths:
             minimum: 1
             maximum: 50
             default: 10
-        - name: Page
-          in: header
-          description: The page to request for. The API delivers 25 elements per page.
-          schema:
-            $ref: "#/components/schemas/Page"
       tags: 
         - event
       responses:
         '200':
-          description: A paginated array of events.
-          headers:
-            Page:
-              description: The current page that the API sends.
-              schema:
-                $ref: "#/components/schemas/Page"
-            Page-Count:
-              description: The number of pages that exist for this query.
-              schema:
-                type: integer
+          description: An array of events.
           content:
             application/json:
               schema:
@@ -134,10 +120,6 @@ components:
       type: http
       scheme: bearer
   schemas:
-    Page:
-      type: integer
-      minimum: 1
-      default: 1
     Source:
       type: object
       required: 
