@@ -15,7 +15,7 @@ The aggregated events can then be displayed via a frontend (as a list).
 
 The application process of eventzimmer is illustrated below:
 
-![eventzimmer bpm](./eventzimmer_process.svg "eventzimmer bpmn")
+![eventzimmer bpm](./docs/eventzimmer_process.svg "eventzimmer bpmn")
 
 For an introduction into the individual services, please have a look at their respective GitHub repositories.
 
