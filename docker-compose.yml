@@ -1,0 +1,22 @@
+version: '3'
+services:
+  postgresql:
+    image: "mdillon/postgis"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+  postgrest:
+    image: "postgrest/postgrest"
+    ports:
+      - "3000:3000"
+    environment:
+      PGRST_DB_URI: postgres://postgres:mysecretpassword@postgresql:5432/postgres
+      PGRST_DB_SCHEMA: eventzimmer
+      PGRST_DB_ANON_ROLE: web_anon
+  swagger-ui:
+    image: "swaggerapi/swagger-ui"
+    ports:
+      - "8080:8080"
+    environment:
+      URL: http://localhost:3000
