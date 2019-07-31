@@ -47,8 +47,11 @@ FROM eventzimmer.locations;
 
 COMMENT ON VIEW eventzimmer.locations_geom IS 'The list of geometries for locations';
 
+-- Specify that radius must be positive and no larger than 25000 meters.
+CREATE DOMAIN radius AS integer CHECK(VALUE > 0 AND VALUE <= 25000);
+
 -- Function for filtering events by latitude / longitude
-CREATE OR REPLACE FUNCTION eventzimmer.events_by_radius(latitude float, longitude float, radius integer default 15000) RETURNS SETOF eventzimmer.events
+CREATE FUNCTION eventzimmer.events_by_radius(latitude float, longitude float, radius radius default 15000) RETURNS SETOF eventzimmer.events
     AS $$
     SELECT * FROM eventzimmer.events WHERE location IN 
     (SELECT name FROM eventzimmer.locations_geom WHERE ST_DWithin(
