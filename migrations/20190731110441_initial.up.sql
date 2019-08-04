@@ -74,3 +74,4 @@ GRANT SELECT ON eventzimmer.locations_geom TO web_anon;
 GRANT EXECUTE ON FUNCTION eventzimmer.events_by_radius TO web_anon;
 
 GRANT INSERT ON eventzimmer.events TO aggregator;
+GRANT SELECT ON eventzimmer.events TO aggregator;
