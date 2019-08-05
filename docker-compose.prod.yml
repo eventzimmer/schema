@@ -1,0 +1,48 @@
+version: '3'
+services:
+  proxy:
+    image: traefik
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./configs/traefik.toml:/traefik.toml
+      - ~/data/traefik/acme.json:/acme.json
+    networks:
+      - web
+  db:
+    restart: always
+    volumes:
+      - ~/data/postgres:/var/lib/postgresql/data
+    networks:
+      - internal
+  api:
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=api"
+      - "traefik.docker.network=web"
+      - "traefik.frontend.rule=Host:api.eventzimmer.de"
+      - "traefik.port=3000"
+    networks:
+      - internal
+      - web
+  docs:
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=docs"
+      - "traefik.docker.network=web"
+      - "traefik.frontend.rule=Host:docs.eventzimmer.de"
+      - "traefik.port=8080"
+    environment:
+      URL: https://api.eventzimmer.de
+    networks:
+      - web
+
+networks:
+  internal:
+  web:
+    external: true

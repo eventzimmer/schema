@@ -5,7 +5,7 @@ We use `PostgreSQL` alongside [PostgREST](http://postgrest.org) to host the `eve
 To set up the database locally, go like this:
 
 ```
-docker run  -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 mdillon/postgis # set up a database
+POSTGRES_PASSWORD=mysecretpassword docker-compose -f docker-compose.yml -f docker-compose.dev.yml up # fire up docker
 
 migrate -path migrations -database "postgresql://postgres:mysecretpassword@localhost:5432/postgres?sslmode=disable" up # initialise database
 
@@ -18,4 +18,3 @@ PGPASSWORD=mysecretpassword psql --user postgres -h localhost < fixtures/events.
 postgrest configs/eventzimmer.conf # run PostgREST
 ```
 
-Additionally, running `docker run -p 8080:8080 -e URL=http://localhost:3000 swaggerapi/swagger-ui` will provide a `Swagger UI` to the schema.

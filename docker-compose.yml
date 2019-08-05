@@ -1,22 +1,19 @@
 version: '3'
 services:
-  postgresql:
+  db:
     image: "mdillon/postgis"
-    ports:
-      - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: mysecretpassword
-  postgrest:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+  api:
     image: "postgrest/postgrest"
-    ports:
-      - "3000:3000"
     environment:
-      PGRST_DB_URI: postgres://postgres:mysecretpassword@postgresql:5432/postgres
-      PGRST_DB_SCHEMA: eventzimmer
-      PGRST_DB_ANON_ROLE: web_anon
-  swagger-ui:
+      PGRST_DB_URI: "postgres://postgres:${POSTGRES_PASSWORD}@db:5432/postgres"
+      PGRST_DB_SCHEMA: "eventzimmer"
+      PGRST_DB_ANON_ROLE: "web_anon"
+      PGRST_JWT_SECRET: "{\"alg\":\"RS256\",\"kty\":\"RSA\",\"use\":\"sig\",\"n\":\"qcmjboEq-H8UuGlGtjewi83HZyXJ_-1wdmw-QyoHmtabo1ZNn0cH78VYlHcxvAj5BobrHa2Ed6Uyb3r0Y4Vh6NOVtks3-IWGWfTiJAtb5PXKyQLESTJCJgPnNUerYLTU-viEQXnYGz1LmPb3KqFJrUp8FEvqH6FBrHqaVGTa8tvJA5lN6yOURv6z-NALxO5Lko_xBHku33syOUu52wPupK-QKlPdUzh8NRIOLny8RVumUs_GXm76lKiBCH3QNxzSRCJb4b5JF-vr5CIAW-S9nUM6u4cBnNMci7FSxP5GS1mx0Z4InUFDhOlWShxCGnr0dN5RHNL3i6pK3JLJmWWU9Q\",\"kid\":\"RTEyMDNCQUJDMUFGNUQyQ0YwRTk2M0Q0OTFGNDdBMDU4RTlERUM2MA\",\"e\":\"AQAB\"}"
+      PGRST_JWT_AUD: "https://api.eventzimmer.de"
+      PGRST_ROLE_CLAIM_KEY: ".\"https://eventzimmer.de/role\""
+  docs:
     image: "swaggerapi/swagger-ui"
-    ports:
-      - "8080:8080"
     environment:
       URL: http://localhost:3000
