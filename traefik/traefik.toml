@@ -23,8 +23,9 @@ exposedByDefault = false
 
 [acme]
 email = "info@eventzimmer.de"
-storage = "acme.json"
+storage="/etc/traefik/acme/acme.json"
 entryPoint = "https"
+acmeLogging=true
 onHostRule = true
     [acme.httpChallenge]
     entryPoint = "http"

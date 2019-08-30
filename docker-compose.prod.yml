@@ -9,7 +9,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik:/etc/traefik
-      - ~/data/traefik/acme.json:/acme.json
+      - ~/data/traefik/:/etc/traefik/acme/
     networks:
       - web
   db:
