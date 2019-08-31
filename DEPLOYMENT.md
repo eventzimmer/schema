@@ -10,8 +10,9 @@ Below is a guide to install `schema` under a fresh Ubuntu.
 5. Bootstrap system service (`mkdir -p ~/.config/systemd/user/` and `cp /usr/system/schema/systemd/schema.service ~/.config/systemd/user/`)
 6. Bootstrap `traefik` and `PostgreSQL` data directories (`mkdir -p ~/.data/traefik` and `mkdir -p ~/.data/postgres`)
 7. Enable auto-start and lingering for the user (`sudo loginctl enable-linger user`)
-8. Add a SSH key (or other way to authenticate to that user) to the user
-9. Log in to the user and enable the service (`systemctl --user enable schema`)
+8. Add `POSTGRES_PASSWORD` environment variable (`echo 'POSTGRES_PASSWORD=password; export POSTGRES_PASSWORD' >> ~/.profile`)
+9. Add a SSH key (or other way to authenticate to that user) to the user
+10. Log in to the user and enable the service (`systemctl --user enable schema`)
 
 The user (e.g `marietta`) can then use `systemctl --user start schema` and all of the `systemctl` and `journalctl` tools to work with the schema command.
 
