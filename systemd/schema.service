@@ -11,7 +11,7 @@ WorkingDirectory=/usr/local/schema
 ExecStart=/usr/local/bin/docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ExecStop=/usr/local/bin/docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
 
-EnvironmentFile=~/.data/pgpassword
+EnvironmentFile=/usr/local/etc/schema/pgpassword
 
 [Install]
 WantedBy=multi-user.target
