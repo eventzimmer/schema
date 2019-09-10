@@ -7,5 +7,7 @@ services:
       ports:
       - "3000:3000"
     docs:
+      environment:
+        URL: http://localhost:3000
       ports:
       - "8080:8080"
