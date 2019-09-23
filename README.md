@@ -9,7 +9,7 @@ The aggregated events can then be displayed via a frontend (as a list).
 
 `eventzimmer` consists of multiple parts that play together that are breafly covered in this section:
 
-- an [API server](https://eventzimmer-api.herokuapp.com/v1/ui) which stores events
+- an [API server](https://docs.eventzimmer.de) which stores events
 - an aggregation tool which uses predefined sources to discover new events
 - a [web frontend](https://eventzimmer.de), which can list the events from the API server.
 
