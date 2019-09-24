@@ -7,7 +7,7 @@ The aggregated events can then be displayed via a frontend (as a list).
 
 # Architecture
 
-`eventzimmer` consists of multiple parts that play together that are breafly covered in this section:
+`eventzimmer` consists of multiple parts that play together that are briefly covered in this section:
 
 - an [API server](https://docs.eventzimmer.de) which stores events
 - an aggregation tool which uses predefined sources to discover new events
