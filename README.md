@@ -5,6 +5,12 @@ eventzimmer
 
 The aggregated events can then be displayed via a frontend (as a list).
 
+`schema` contains the code for the eventzimmer backend.
+
+# Getting started
+
+To get you a version of `schema` please have a look at the [install instructions](./SETUP.md).
+
 # Architecture
 
 `eventzimmer` consists of multiple parts that play together that are briefly covered in this section:
