@@ -1,5 +1,7 @@
 # Setting up the eventzimmer API
 
+[![Gitter](https://badges.gitter.im/eventzimmer/community.svg)](https://gitter.im/eventzimmer/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 We use `PostgreSQL` alongside [PostgREST](http://postgrest.org) to host the `eventzimmer` API.
 
 To get a local setup you will need to have the following tools installed on your machine:
