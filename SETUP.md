@@ -12,7 +12,7 @@ Within this directory, follow the white rabbit:
 ```
 POSTGRES_PASSWORD=mysecretpassword docker-compose -f docker-compose.yml -f docker-compose.dev.yml up # fire up docker
 
-docker run -v $PWD/migrations:/migrations/ --network="container:eventzimmer_schema-db" migrate/migrate -path=/migrations -database "postgresql://postgres:mysecretpassword@eventzimmer_schema-db:5432/postgres?sslmode=disable" up # initialise database
+docker run -v $PWD/migrations:/migrations/ --network="container:schema_db_1" migrate/migrate -path=/migrations -database "postgresql://postgres:mysecretpassword@schema_db_1:5432/postgres?sslmode=disable" up # initialise database
 
 PGPASSWORD=mysecretpassword psql --user postgres -h localhost -c "\copy eventzimmer.sources FROM fixtures/sources.csv DELIMITER ',' CSV HEADER;" # insert sources
 
