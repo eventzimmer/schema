@@ -52,7 +52,7 @@ FROM eventzimmer.locations;
 COMMENT ON VIEW protected.locations_geom IS 'The list of geometries for locations';
 
 -- Events no older than 3 hours up to 60 days
-CREATE VIEW protected.recent_events AS SELECT * FROM eventzimmer.events WHERE starts_at >= current_timestamp - interval '3 hours' AND starts_at <= current_timestamp + interval '60 days';
+CREATE VIEW protected.recent_events AS SELECT * FROM eventzimmer.events WHERE starts_at >= current_timestamp - interval '3 hours' AND starts_at < (date_trunc('month', current_timestamp::date) + interval '2 month')::date;
 
 COMMENT ON VIEW protected.recent_events IS 'Recent events';
 
