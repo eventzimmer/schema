@@ -1,6 +1,11 @@
 CONTRIBUTORS
 ------------
 
-- [Diego Mesa](https://github.com/dialmedu)
+- [Diego Mesa](https://github.com/dialmedu) 
+    - [fixed the _read-more_ button in `site`](https://github.com/eventzimmer/site/issues/24)
 - [fgehrlicher](https://github.com/fgehrlicher)
+    - documentation fixes for [psql](https://github.com/eventzimmer/schema/issues/17) and [migrate](https://github.com/eventzimmer/schema/issues/16)
 - [Sven Hilsmann](https://github.com/hilsmann)
+    - [eslint for `site`](https://github.com/eventzimmer/site/issues/28)
+- [Michael Gangolf](https://github.com/m1ga)
+    - [added `i18n` for `site`](https://github.com/eventzimmer/site/issues/19)
