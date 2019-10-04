@@ -1,6 +1,8 @@
 eventzimmer
 -----------
 
+[![Gitter](https://badges.gitter.im/eventzimmer/community.svg)](https://gitter.im/eventzimmer/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 `eventzimmer` is an event aggregation service that makes it possible to aggregate events from a multitude of services (such as iCalendar and Facebook).
 
 The aggregated events can then be displayed via a frontend (as a list).
