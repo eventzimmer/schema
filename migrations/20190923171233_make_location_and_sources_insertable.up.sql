@@ -14,6 +14,17 @@ CREATE TABLE IF NOT EXISTS protected.sources_owners (
 
 COMMENT ON TABLE protected.sources_owners IS 'Holds sources owners';
 
+--- insert owners for existing locations and sources
+INSERT INTO protected.locations_owners (name, sub)
+SELECT location.name, 'email|5d7cd769aa7e3093bfe6d3f7'
+FROM eventzimmer.locations as location
+ON CONFLICT DO NOTHING;
+
+INSERT INTO protected.sources_owners (url, sub)
+SELECT source.url, 'email|5d7cd769aa7e3093bfe6d3f7'
+FROM eventzimmer.sources as source
+ON CONFLICT DO NOTHING;
+
 --- create trigger for locations
 CREATE FUNCTION protected.add_location_owner() RETURNS trigger AS $add_location_owner$
     BEGIN
