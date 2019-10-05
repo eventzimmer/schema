@@ -33,7 +33,7 @@ POSTGRES_PASSWORD=mysecretpassword docker-compose -f docker-compose.yml -f docke
 If you need introspection into the `Postgres` instance you can use `docker exec`:
 
 ```
-docker exec -i -e PGPASSWORD=mysecretpassword schema_db_1 psql --user postgres -h localhost
+docker exec -it -e PGPASSWORD=mysecretpassword schema_db_1 psql --user postgres -h localhost
 ```
 
 ## Setting up authentication
