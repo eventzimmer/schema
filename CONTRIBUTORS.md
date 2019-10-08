@@ -9,3 +9,5 @@ CONTRIBUTORS
     - [eslint for `site`](https://github.com/eventzimmer/site/issues/28)
 - [Michael Gangolf](https://github.com/m1ga)
     - [added `i18n` for `site`](https://github.com/eventzimmer/site/issues/19)
+- [Attila Blascsák](https://github.com/blascsi)
+    - [eslint for `dashboard`](https://github.com/eventzimmer/dashboard/issues/1)
