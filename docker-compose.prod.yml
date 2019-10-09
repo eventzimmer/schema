@@ -1,7 +1,7 @@
 version: '3'
 services:
   proxy:
-    image: traefik
+    image: traefik:1.7-alpine
     restart: always
     ports:
       - "80:80"
@@ -29,6 +29,8 @@ services:
     networks:
       - internal
       - web
+    environment:
+      PGRST_SERVER_PROXY_URI: "https://api.eventzimmer.de:443"
   docs:
     restart: always
     labels:

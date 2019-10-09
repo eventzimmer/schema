@@ -8,6 +8,8 @@ services:
     api:
       ports:
       - "3000:3000"
+      environment:
+        PGRST_SERVER_PROXY_URI: "http://localhost:3000"
     docs:
       environment:
         URL: http://localhost:3000
