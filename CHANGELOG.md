@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cascade events when source or location is deleted
 
 ### Added 
+- Add view for locations and for sources listed by owner
 - Make it possible to insert and delete locations and sources
 
 ## 0.0.1
