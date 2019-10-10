@@ -11,3 +11,5 @@ CONTRIBUTORS
     - [added `i18n` for `site`](https://github.com/eventzimmer/site/issues/19)
 - [Attila Blascsák](https://github.com/blascsi)
     - [eslint for `dashboard`](https://github.com/eventzimmer/dashboard/issues/1)
+- [Timur Tarasenko](https://github.com/TimurTarasenko)
+    - [fixed issue with recent_events view](https://github.com/eventzimmer/schema/pull/26/)

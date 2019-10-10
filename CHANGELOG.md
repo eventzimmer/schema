@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
+- Return exactly two months in protected.recent_events
 - Fixed bug in OpenAPI definition (wrong remote host)
 - Make sources and locations unique
 
