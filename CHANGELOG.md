@@ -5,8 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fixed bug in OpenAPI definition (wrong remote host)
+- Make sources and locations unique
 
-### 0.0.1
+### Changed
+- Use docker for psql and migrate commands
+- Cascade events when source or location is deleted
+
+### Added 
+- Make it possible to insert and delete locations and sources
+
+## 0.0.1
 ### Added
 - Added CONTRIBUTING.md
 - Add docker development and deploy compose config
