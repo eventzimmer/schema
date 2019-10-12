@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Added proposed_events_by_organizer view
 - Added proposed_events table
 - Added accept_event function
 

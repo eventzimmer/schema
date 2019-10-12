@@ -38,7 +38,17 @@ SET search_path = eventzimmer, protected, pg_temp;
 
 COMMENT ON FUNCTION eventzimmer.accept_event IS 'Moves an event from proposed events to events.';
 
+--- add view to display proposed events
+CREATE VIEW eventzimmer.proposed_events_by_organizer AS (
+    SELECT proposed_events.* 
+    FROM eventzimmer.proposed_events AS proposed_events 
+    WHERE proposed_events.source IN (SELECT owners.url FROM protected.sources_owners AS owners WHERE owners.sub = (SELECT current_setting('request.jwt.claim.sub', true)))
+);
+
+COMMENT ON VIEW eventzimmer.proposed_events_by_organizer IS 'Lists all the proposed events for the organizer';
+
 --- add grants
+GRANT SELECT ON eventzimmer.proposed_events_by_organizer TO organizer;
 GRANT SELECT, INSERT ON eventzimmer.proposed_events TO aggregator;
 
 GRANT EXECUTE ON FUNCTION eventzimmer.accept_event TO organizer;
