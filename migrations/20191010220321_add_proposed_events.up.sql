@@ -23,7 +23,7 @@ BEGIN
     ELSE
         SELECT proposed_events.* FROM eventzimmer.proposed_events AS proposed_events WHERE proposed_events.url = accept_event.url INTO event;
     END IF;
-    RAISE NOTICE 'Event name %', event.name;
+    RAISE LOG 'Moving event with url % from proposed_events to events.', event.url;
     --- add location to event
     event.location = accept_event.location;
     --- remove proposed event
