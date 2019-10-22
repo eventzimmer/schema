@@ -1,6 +1,8 @@
 #!/bin/sh
 
 program_name=$(basename $0)
+pg_password="${PGPASSWORD:-mysecretpassword}"
+container_name="${CONTAINER_NAME:-schema_db_1}"
   
 sub_help(){
     echo "Usage: $program_name <subcommand> [options]\n"
@@ -19,7 +21,8 @@ sub_bootstrap(){
 }
 
 sub_psql(){
-    echo "Running 'psql' command."
+    echo "Attaching to $container_name"
+    docker exec -it -e PGPASSWORD=$pg_password $container_name psql --user postgres -h localhost
 }
 
 sub_migrate(){
