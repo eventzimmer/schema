@@ -18,6 +18,11 @@ sub_help(){
 
 sub_bootstrap(){
     echo "Running 'bootstrap' command."
+    docker run -v $PWD/migrations:/migrations/ --network="container:$container_name" migrate/migrate -path=/migrations -database "postgresql://postgres:$pg_password@$container_name:5432/postgres?sslmode=disable" up 1 # initialise database
+    docker exec -i -e PGPASSWORD=$pg_password $container_name psql --user postgres -h localhost -c "\copy eventzimmer.sources FROM /fixtures/sources.csv DELIMITER ',' CSV HEADER;" # insert sources
+    docker exec -i -e PGPASSWORD=$pg_password $container_name psql --user postgres -h localhost -c "\copy eventzimmer.locations FROM fixtures/locations.csv DELIMITER ',' CSV HEADER;" # insert locations
+    docker exec -i -e PGPASSWORD=$pg_password $container_name bash -c "psql --user postgres -h localhost < /fixtures/events.sql" # insert events
+    docker run -v $PWD/migrations:/migrations/ --network="container:$container_name" migrate/migrate -path=/migrations -database "postgresql://postgres:$pg_password@$container_name:5432/postgres?sslmode=disable" up # add remaining migrations
 }
 
 sub_psql(){
