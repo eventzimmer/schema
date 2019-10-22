@@ -26,7 +26,8 @@ sub_psql(){
 }
 
 sub_migrate(){
-    echo "Running 'migrate' command."
+    echo "Running 'migrate' command"
+    docker run -v $PWD/migrations:/migrations/ --network="container:$container_name" migrate/migrate -path=/migrations -database "postgresql://postgres:$pg_password@$container_name:5432/postgres?sslmode=disable" "$@"
 }
   
 subcommand=$1
