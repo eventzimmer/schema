@@ -8,12 +8,18 @@ sub_help(){
     echo "Usage: $program_name <subcommand> [options]\n"
     echo "Subcommands:"
     echo "    bootstrap   Bootstraps a new database with fixtures and migrations"
+    echo "    update      Sets a recent starts_at date for all events"
     echo "    psql        Attaches a psql REPL to the database"
     echo "    migrate     Runs a migrate instance against the database"
     echo ""
     echo "For help with each subcommand run:"
     echo "$program_name <subcommand> -h|--help"
     echo ""
+}
+
+sub_update(){
+    echo "Updating all event start dates."
+    docker exec -i -e PGPASSWORD=$pg_password $container_name psql --user postgres -h localhost -c "UPDATE eventzimmer.events SET starts_at = (SELECT CAST(now() + '1 month'::interval * random()  as timestamptz));"
 }
 
 sub_bootstrap(){
