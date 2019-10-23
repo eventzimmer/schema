@@ -16,6 +16,7 @@ Within this directory, [follow the white rabbit](https://youtu.be/plfMjbnM2Ek?t=
 ```
 POSTGRES_PASSWORD=mysecretpassword docker-compose up -d # fire up docker
 ./schema.sh bootstrap # bootstraps a new database
+./schema.sh update # updates the events to be recent for development
 docker-compose stop # if you want to stop the development setup
 ```
 
