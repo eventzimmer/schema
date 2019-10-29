@@ -68,7 +68,7 @@ CREATE FUNCTION eventzimmer.events_by_radius(latitude float, longitude float, ra
       (SELECT CAST(ST_SetSRID(ST_Point(longitude, latitude), 4326) AS GEOGRAPHY)),
       radius
     ))
-$$ LANGUAGE SQL STABLE;
+$$ LANGUAGE SQL STABLE SET search_path = public;
 
 COMMENT ON FUNCTION eventzimmer.events_by_radius IS 'Filters event by radius';
 
